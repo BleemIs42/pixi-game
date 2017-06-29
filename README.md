@@ -1,30 +1,96 @@
-# Phaser-game
+# Pixi-game
 
-## Node dev
-```shell
-npm/yarn install      # install
+# API
+1. Class
+    - Game: extends from class Application
+        - Members: 
+            - state
+                - Methods:
+                    - add(name, stage): register a stage to stage container
+                    - start(name): switch a new stage
+    - Stage: extends from class Container
+        - Members: 
+            - game: the instance of class Game 
+            - stage: the renderer of game
+            - state: the same as class Game state
+        - Methods: 
+            - loader: PIXI.loader
+            - add: alias of addChild
+            - init
+            - preload: load some resources
+            - create: after all resources loaded, add displayObject to stage
+            - update: update displayObject status
 
-npm run dev           # dev                          http://localhost:8001
-npm run build         # build                        http://localhost:9001
-npm run buildServer   # build with preview           http://localhost:9001
 
-npm run dStart        # run dev use docker           http://localhost:8000
-npm run dBuild        # run build use docker         
-npm run dBuildServer  # run buildServer use docker   http://localhost:9000
-```
+# Example
+```js
+import {
+    Game,
+    State
+} from 'lib'
 
-## Docker dev
+import logo from 'assets/logo.png'
 
-```shell
-# Build an image [vue-multi-page] from a Dockerfile
-docker build -t vue-multi-page .
-# npm install --production   // update   dependencies
+class Boot extends State {
+    init() {
+        console.log('Boot init')
+    }
+    preload() {
+        console.log('Boot preload')
+        this.loader.add('logo', logo)
+    }
+    create() {
+        console.log('Boot create')
 
-docker run -it -rm -v ${PWD}:/usr/src/app -p 8000:8001 [-p 9000:9001] --name example  vue-multi-page [sh]
+        let basicText = new PIXI.Text('Boot text in pixi')
+        this.add(basicText)
+        this.add('logo')
 
-# Container {{name}} is running, else docker start {{name}}
-docker exec -it {{name}} 进入容器
-docker exec {{name}} npm run start
-docker exec {{name}} npm run build
+        setTimeout(() => {
+            this.state.start('Loading')
+        }, 3000)
+    }
+    update() {
+        console.log('Boot update')
 
+    }
+}
+
+class Loading extends State {
+    init() {
+        console.log('Loading init')
+        this.stage.backgroundColor = 0xff0000
+    }
+    preload() {
+        console.log('Loading preload')
+    }
+    create() {
+        console.log('Loading create')
+        let basicText = new PIXI.Text('Loading text in pixi')
+        this.add(basicText)
+    }
+    update() {
+        console.log('Loading update')
+    }
+}
+
+const states = {
+    Boot,
+    Loading
+}
+
+class App extends Game {
+    constructor() {
+        super(400, 300, {
+            backgroundColor: 0xeeeeee
+        })
+
+        Object.keys(states).forEach(state => this.state.add(state, states[state]))
+
+        this.state.start('Boot')
+    }
+}
+
+const app = new App()
+document.body.appendChild(app.view)
 ```

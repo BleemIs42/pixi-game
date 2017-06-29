@@ -1,7 +1,7 @@
 import {
     Game,
     State
-} from './game.js'
+} from 'lib'
 
 import logo from 'assets/logo.png'
 
@@ -12,9 +12,6 @@ class Boot extends State {
     preload() {
         console.log('Boot preload')
         this.loader.add('logo', logo)
-        // this.loader.load((loaders, resources)=>{
-        //     this.addChild(resources.logo)
-        // })
     }
     create() {
         console.log('Boot create')
@@ -29,14 +26,14 @@ class Boot extends State {
     }
     update() {
         console.log('Boot update')
-        
+
     }
 }
 
-let count = 0
 class Loading extends State {
     init() {
         console.log('Loading init')
+        this.stage.backgroundColor = 0xff0000
     }
     preload() {
         console.log('Loading preload')
