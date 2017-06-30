@@ -13,6 +13,7 @@
             - game: the instance of class Game 
             - stage: the renderer of game
             - state: the same as class Game state
+            - assets: all load resources
         - Methods: 
             - loader: PIXI.loader
             - add: alias of addChild

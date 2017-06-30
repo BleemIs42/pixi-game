@@ -6,7 +6,7 @@ import {
 } from 'pixi.js'
 
 let __game
-let __resources = {}
+let __assets = {}
 
 let stateContainer = {
     __states: {},
@@ -58,15 +58,19 @@ class State extends Container {
         this.preload()
 
         this.loader.load((loaders, resources) => {
-            __resources = Object.assign({}, __resources, resources) 
+            __assets = Object.assign({}, __assets, resources)
+            this.assets = __assets
             this.create()
         })
         this.add = name => {
+            let sprite
             if (typeof name === 'string') {
-                this.addChild( new Sprite(__resources[name].texture))
-                return
+                sprite = new Sprite(__assets[name].texture)
+                this.addChild(sprite)
+                return sprite
             }
             this.addChild(name)
+            return sprite
         }
 
         if(__hasLoad) return

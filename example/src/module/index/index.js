@@ -18,10 +18,13 @@ class Boot extends State {
 
         let basicText = new PIXI.Text('Boot text in pixi')
         this.add(basicText)
-        this.add('logo')
+
+        this.logo = this.add('logo')
+        this.logo.x = 100
+        this.logo.y = 20
 
         setTimeout(() => {
-            this.state.start('Loading')
+            // this.state.start('Loading')
         }, 3000)
     }
     update() {
