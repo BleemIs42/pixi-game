@@ -8,7 +8,7 @@
                 - Methods:
                     - add(name, stage): register a stage to stage container
                     - start(name): switch a new stage
-    - Stage: extends from class Container
+    - State: extends from class Container
         - Members: 
             - game: the instance of class Game 
             - stage: the renderer of game
