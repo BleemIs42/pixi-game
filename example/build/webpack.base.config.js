@@ -17,7 +17,7 @@ export default {
             'assets': path.resolve(__dirname, '../src/assets'),
             'components': path.resolve(__dirname, '../src/components'),
             'module': path.resolve(__dirname, '../src/module'),
-            'lib': path.resolve(__dirname, '../lib'),
+            'pixi-game': path.resolve(__dirname, '../../dist/pixi-game.min.js'),
         }
     },
     devtool: 'source-map',

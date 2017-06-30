@@ -1,7 +1,7 @@
 import {
     Game,
     State
-} from 'lib'
+} from 'pixi-game'
 
 import logo from 'assets/logo.png'
 

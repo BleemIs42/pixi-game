@@ -2,17 +2,13 @@
   "name": "pixi-game",
   "version": "0.0.1",
   "description": "",
-  "main": "./lib/index.js",
+  "main": "./dist/pixi-game.min.js",
   "scripts": {
-    "start": "npm run dev",
-    "dev": "NODE_ENV=development node index",
-    "build": "rm -rf dist && NODE_ENV=production node index",
-    "buildServer": "rm -rf dist && NODE_ENV=preview node index"
+    "build": "rm -rf dist && NODE_ENV=production node build/index"
   },
   "license": "ISC",
   "dependencies": {
-    "pixi.js": "4.5.3",
-    "vue": "^2.3.4"
+    "pixi.js": "4.5.3"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.1",
@@ -23,29 +19,6 @@
     "babel-preset-es2017": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "babel-register": "^6.24.0",
-    "css-loader": "^0.28.4",
-    "eventsource-polyfill": "^0.9.6",
-    "extract-text-webpack-plugin": "^2.1.2",
-    "file-loader": "^0.11.2",
-    "glob": "^7.1.2",
-    "html-webpack-plugin": "^2.29.0",
-    "http-proxy-middleware": "^0.17.4",
-    "ip": "^1.1.5",
-    "koa": "^2.3.0",
-    "koa-connect-history-api-fallback": "^0.3.1",
-    "koa-proxies": "^0.3.0",
-    "koa2-serve-index": "^2.0.1",
-    "koa2-static-files": "^1.0.4",
-    "less": "^2.7.2",
-    "less-loader": "^4.0.4",
-    "postcss-px2rem": "^0.3.0",
-    "style-loader": "^0.18.2",
-    "url-loader": "^0.5.9",
-    "vue-html-loader": "^1.2.4",
-    "vue-loader": "^13.0.0",
-    "vue-template-compiler": "^2.3.4",
-    "webpack": "^3.0.0",
-    "webpack-dev-middleware": "^1.11.0",
-    "webpack-hot-middleware": "^2.18.0"
+    "webpack": "^3.0.0"
   }
 }
