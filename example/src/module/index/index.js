@@ -24,11 +24,11 @@ class Boot extends State {
         this.logo.y = 20
 
         setTimeout(() => {
-            // this.state.start('Loading')
+            this.state.start('Loading')
         }, 3000)
     }
     update() {
-        console.log('Boot update')
+        // console.log('Boot update')
 
     }
 }
@@ -37,6 +37,10 @@ class Loading extends State {
     init() {
         console.log('Loading init')
         this.stage.backgroundColor = 0xff0000
+        // this.stage.width = 800
+        // this.stage.height = 600
+        this.stage.resize(800, 600)
+        this.stage.autoResizeboolean = true
     }
     preload() {
         console.log('Loading preload')
@@ -47,7 +51,7 @@ class Loading extends State {
         this.add(basicText)
     }
     update() {
-        console.log('Loading update')
+        // console.log('Loading update')
     }
 }
 
@@ -65,6 +69,7 @@ class App extends Game {
         Object.keys(states).forEach(state => this.state.add(state, states[state]))
 
         this.state.start('Boot')
+        console.log(this)
     }
 }
 
