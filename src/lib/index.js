@@ -46,7 +46,9 @@ class State extends Container {
         this.game = __game
         this.stage = __game.renderer
         this.state = stateContainer
+        this.assets = __assets
 
+        
         this.add = name => {
             let sprite
             if (typeof name === 'string') {
