@@ -23,6 +23,7 @@ let stateContainer = {
         __game.ticker.remove(this.__active.update, this.__active.state)
 
         const ActiveState = this.__states[name]
+        if(!ActiveState) throw new Error(`${name} state is not exist`)
         const activeState = new ActiveState()
         __game.ticker.add(activeState.update, activeState)
         __game.stage.addChild(activeState)
@@ -46,22 +47,6 @@ class State extends Container {
         this.stage = __game.renderer
         this.state = stateContainer
 
-        let __hasLoad = false
-        const loaderAdd = loader.add
-        loader.add = (name, path, option, cb) => {
-            __hasLoad = true
-            loaderAdd.call(loader, name, path, option, cb)
-        }
-        this.loader = loader
-
-        this.init()
-        this.preload()
-
-        this.loader.load((loaders, resources) => {
-            __assets = Object.assign({}, __assets, resources)
-            this.assets = __assets
-            this.create(loaders, resources)
-        })
         this.add = name => {
             let sprite
             if (typeof name === 'string') {
@@ -73,6 +58,24 @@ class State extends Container {
             return sprite
         }
 
+        this.init()
+
+        let __hasLoad = false
+        const loaderAdd = loader.add
+        loader.add = (name, path, option, cb) => {
+            __hasLoad = true
+            loaderAdd.call(loader, name, path, option, cb)
+        }
+        this.loader = loader
+
+        this.preload()
+
+        this.loader.load((loaders, resources) => {
+            __assets = Object.assign({}, __assets, resources)
+            this.assets = __assets
+            this.create(loaders, resources)
+        })
+
         if(__hasLoad) return
         this.create()
     }
@@ -82,7 +85,13 @@ class State extends Container {
     update() {}
 }
 
+// console.log(PIXI)
+
+// PIXI.Game = Game
+// PIXI.State = State
+// export default PIXI
+
 export {
     Game,
     State
-}
+}   
