@@ -60,7 +60,7 @@ class State extends Container {
         this.loader.load((loaders, resources) => {
             __assets = Object.assign({}, __assets, resources)
             this.assets = __assets
-            this.create()
+            this.create(loaders, resources)
         })
         this.add = name => {
             let sprite
