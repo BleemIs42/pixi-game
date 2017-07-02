@@ -49,15 +49,15 @@ class State extends Container {
         this.assets = __assets
 
         
-        this.add = name => {
-            let sprite
+        this.add = (name, ctx) => {
+            ctx = ctx || this
             if (typeof name === 'string') {
-                sprite = new Sprite(__assets[name].texture)
-                this.addChild(sprite)
+                const sprite = new Sprite(__assets[name].texture)
+                ctx.addChild(sprite)
                 return sprite
             }
-            this.addChild(name)
-            return sprite
+            ctx.addChild(name)
+            return name
         }
 
         this.init()
