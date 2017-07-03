@@ -64,6 +64,7 @@ document.body.appendChild(window.game.view)
 - preload `[Function]` Use this.add function to preload resource.
 - create `[Function]` After all resource loaded, create display Object.
 - update `[Function]` After displayObjec created, update status.
+- rerener `[Function]` Rerender all displayObject in stage.
 
 ##### Example
 ```js
