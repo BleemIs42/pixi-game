@@ -28,7 +28,7 @@ const stateContainer = {
         const activeState = new ActiveState()
 
         const update = () => {
-            if(!activeState.__isLoaded) return
+            if(!activeState.__isCreated) return
             activeState.update()
         }
         __game.ticker.add(update)
@@ -53,7 +53,7 @@ class State extends Container {
         this.stage = __game.renderer
         this.state = stateContainer
         this.assets = __assets
-        this.__isLoaded = false
+        this.__isCreated = false
 
         this.rerender = () => {
             this.removeChildren()
@@ -80,10 +80,10 @@ class State extends Container {
 
         this.init()
 
-        let __hasLoad = false
+        let __isLoaded = false
         const loaderAdd = loader.add
         loader.add = (name, path, option, cb) => {
-            __hasLoad = true
+            __isLoaded = true
             loaderAdd.call(loader, name, path, option, cb)
         }
         this.loader = loader
@@ -91,15 +91,15 @@ class State extends Container {
         this.preload()
 
         this.loader.load((loaders, resources) => {
-            this.__isLoaded = true
+            this.__isCreated = true
             __assets = Object.assign({}, __assets, resources)
             this.assets = __assets
             this.create(loaders, resources)
         })
 
-        if(!__hasLoad) {
+        if(!__isLoaded) {
             this.create()
-            this.__isLoaded = true
+            this.__isCreated = true
         } 
         
     }
