@@ -33,6 +33,7 @@ class Boot extends State {
     }
 }
 
+let angle = 0
 class Loading extends State {
     init() {
         console.log('Loading init')
@@ -44,14 +45,17 @@ class Loading extends State {
     }
     preload() {
         console.log('Loading preload')
+        this.loader.add('logo2', logo)
     }
     create() {
         console.log('Loading create')
-        let basicText = new PIXI.Text('Loading text in pixi')
-        this.add(basicText)
+        this.basicText = new PIXI.Text('Loading text in pixi')
+        this.add(this.basicText)
     }
     update() {
         // console.log('Loading update')
+        this.basicText.x += Math.cos(angle)
+        angle += 0.2
     }
 }
 

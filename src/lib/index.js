@@ -25,9 +25,14 @@ let stateContainer = {
         const ActiveState = this.__states[name]
         if(!ActiveState) throw new Error(`${name} state is not exist`)
         const activeState = new ActiveState()
-        __game.ticker.add(activeState.update, activeState)
+
+        const update = () => {
+            if(!activeState.__isLoaded) return
+            activeState.update()
+        }
+        __game.ticker.add(update)
         __game.stage.addChild(activeState)
-        this.__active.update = activeState.update
+        this.__active.update = update
         this.__active.state = activeState
     }
 }
@@ -47,6 +52,7 @@ class State extends Container {
         this.stage = __game.renderer
         this.state = stateContainer
         this.assets = __assets
+        this.__isLoaded = false
 
         
         this.add = (name, parent) => {
@@ -58,6 +64,11 @@ class State extends Container {
             }
             parent.addChild(name)
             return name
+        }
+        this.remove = (child, parent) => {
+            parent = parent || this
+            parent.removeChild(child)
+            return child
         }
 
         this.init()
@@ -73,25 +84,20 @@ class State extends Container {
         this.preload()
 
         this.loader.load((loaders, resources) => {
+            this.__isLoaded = true
             __assets = Object.assign({}, __assets, resources)
             this.assets = __assets
             this.create(loaders, resources)
         })
 
-        if(__hasLoad) return
-        this.create()
+        if(!__hasLoad) this.create()
+        
     }
     init() {}
     preload() {}
     create(loaders, resources) {}
     update() {}
 }
-
-// console.log(PIXI)
-
-// PIXI.Game = Game
-// PIXI.State = State
-// export default PIXI
 
 export {
     Game,
