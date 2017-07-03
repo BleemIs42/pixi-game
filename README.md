@@ -1,6 +1,13 @@
 # Pixi-game
 > A libiray makes Pixi.js using easily.
 
+# Use 
+```bash
+npm install pixi-game
+# or
+yarn add pixi-game
+```
+
 # Class
 
 # Game: Extends from PIXI.Application.
