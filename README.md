@@ -1,28 +1,125 @@
 # Pixi-game
+> A libiray makes Pixi.js using easily.
 
-# API
-1. Class
-    - Game: extends from class Application
-        - Members: 
-            - state
-                - Methods:
-                    - add(name, stage): register a stage to stage container
-                    - start(name): switch a new stage
-    - State: extends from class Container
-        - Members: 
-            - game: the instance of class Game 
-            - stage: the renderer of game
-            - state: the same as class Game state
-            - assets: all load resources
-        - Methods: 
-            - loader: PIXI.loader
-            - add: alias of addChild
-            - init
-            - preload: load some resources
-            - create: after all resources loaded, add displayObject to stage
-            - update: update displayObject status
+# Class
 
+# Game: Extends from PIXI.Application.
+## new Game(option)
+## option: As same option of PIXI.Application.
+##### *Members*
+- state `[Object]`
+    - __states `[Object]` The container of all add state container.
+    - active `[Object]`
+        - name `[String]`
+        - state `[Object]` Current running state, extends PIXI.Container.
+        - update `[Function]` Current running function in PIXI.ticker.
+    - add `[Function]`
+        - @param name `[String]` State name.
+        - @param state `[Object]` State extends PIXI.Container.
+    - start `[Function]` Switch render a new state to stage.
+        - @param name `[String]` State of state container.
+##### Example
+```js
+import * as states from 'components/game'
+class App extends Game {
+    constructor() {
+        super(getWinSize().w, getWinSize().h, {
+            backgroundColor: 0xeeeeee
+        })
 
+        Object.keys(states).forEach(state => this.state.add(state, states[state]))
+
+        this.state.start('Boot')
+
+        window.onresize = () =>{
+            this.renderer.resize(getWinSize().w, getWinSize().h)
+            this.state.active.state.removeChildren()
+            this.state.active.state.rerender()
+        }
+    }
+}
+
+window.game = new App()
+document.body.appendChild(window.game.view)
+```
+---
+# State: Extends from PIXI.Container
+## new State()
+##### *Members*      
+- game `[Object]` The instance of Game
+- stage `[Object]` Equal **renderer** which is the property of Game's instance.
+- state `[Object]` As same as Game's state.
+- loader `[Object]` PIXI.loader.
+- assets `[Object]` All resource loaded use this.loader.add().
+- add `[Function]`
+    - @param `[String | Object]` The loaded resource name or sprite.
+- init `[Function]` Some init action.
+- preload `[Function]` Use this.add function to preload resource.
+- create `[Function]` After all resource loaded, create display Object.
+- update `[Function]` After displayObjec created, update status.
+
+##### Example
+```js
+import { State } from 'pixi-game'
+import { Text } from 'pixi.js'
+import logo from 'assets/logo.png'
+
+let sY = angle = 0
+export default class extends State {
+    init() {
+        this.stage.backgroundColor = 0xeeeeee
+
+        const loading = new Text(
+            'loading...',
+            {
+                fontSize: 50,
+                fill: 0xff0f0f
+            }
+        )
+        loading.position.set(this.stage.width / 2, this.stage.height / 2)
+        loading.anchor.set(0.5)
+        this.loading = loading
+        this.add(loading)
+    }
+    preload() {
+        this.loader.add('logo', logo)
+        this.loader.onProgress.add(loader => {
+            this.loading.text = `loading ${parseInt(loader.progress)}%`
+            this.state.start('Home')
+        })
+    }
+    create() {
+        this.logo = this.add('logo')
+        thi.logo.position.set(this.stage.width / 2, this.stage.height / 4)
+        this.logo.anhor.set(0.5)
+        sY = this.logo.y
+    }
+    update() {
+        if(angle > Math.PI * 2) angle = 0
+        this.logo.y = sY + Math.sin(angle)
+        angle += 0.1
+    }
+}
+```
+
+---
+# AnimatedSprite
+## new AnimatedSprite(baseTexture, spriteSheetJson)
+- @param baseTexture [Object] The instance of PIXI.BaseTexture.
+- @param spriteSheetJson [Object] JSON hash export from  TexturePacker.
+- @return [Object] An animated Sprite.
+
+##### Example 
+```js
+const redpack = new AnimatedSprite(this.assets.redpack.texture.baseTexture, redpackJson)
+redpack.position.set(571, 255)
+redpackX = redpack.x
+redpack.animationSpeed = 0.05
+redpack.play()
+this.redpack = this.add(redpack, gift)
+```
+
+---
 # Example
 ```js
 import {
@@ -95,3 +192,6 @@ class App extends Game {
 const app = new App()
 document.body.appendChild(app.view)
 ```
+
+# License
+ MIT

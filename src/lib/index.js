@@ -8,7 +8,7 @@ import {
 let __game
 let __assets = {}
 
-let stateContainer = {
+const stateContainer = {
     __states: {},
     active: {
         name: '',
@@ -55,7 +55,13 @@ class State extends Container {
         this.assets = __assets
         this.__isLoaded = false
 
-        
+        this.rerender = () => {
+            this.removeChildren()
+            this.init()
+            this.preload()
+            this.create()
+        }
+
         this.add = (name, parent) => {
             parent = parent || this
             if (typeof name === 'string') {
@@ -95,13 +101,6 @@ class State extends Container {
             this.create()
             this.__isLoaded = true
         } 
-
-        this.rerender = () => {
-            this.removeChildren()
-            this.init()
-            this.preload()
-            this.create()
-        }
         
     }
     init() {}
@@ -110,7 +109,19 @@ class State extends Container {
     update() {}
 }
 
+class AnimatedSprite {
+    constructor(baseTexture, spriteSheetJson) {
+        const spritesheet = new Spritesheet(baseTexture, spriteSheetJson)
+        const frames = []
+        spritesheet.parse(textures => {
+            Object.keys(textures).forEach(key => frames.push(Texture.fromFrame(key)))
+        })
+        return new extras.AnimatedSprite(frames)
+    }
+}
+
 export {
     Game,
-    State
+    State,
+    AnimatedSprite
 }   
