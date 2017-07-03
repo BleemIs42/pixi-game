@@ -10,7 +10,8 @@ let __assets = {}
 
 let stateContainer = {
     __states: {},
-    __active: {
+    active: {
+        name: '',
         state: null,
         update() {}
     },
@@ -20,7 +21,7 @@ let stateContainer = {
     },
     start(name) {
         __game.stage.removeChildren()
-        __game.ticker.remove(this.__active.update, this.__active.state)
+        __game.ticker.remove(this.active.update, this.active.state)
 
         const ActiveState = this.__states[name]
         if(!ActiveState) throw new Error(`${name} state is not exist`)
@@ -32,8 +33,8 @@ let stateContainer = {
         }
         __game.ticker.add(update)
         __game.stage.addChild(activeState)
-        this.__active.update = update
-        this.__active.state = activeState
+        this.active.update = update
+        this.active.state = activeState
     }
 }
 
@@ -95,6 +96,12 @@ class State extends Container {
             this.__isLoaded = true
         } 
 
+        this.rerender = () => {
+            this.removeChildren()
+            this.init()
+            this.preload()
+            this.create()
+        }
         
     }
     init() {}
