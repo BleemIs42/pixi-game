@@ -90,7 +90,11 @@ class State extends Container {
             this.create(loaders, resources)
         })
 
-        if(!__hasLoad) this.create()
+        if(!__hasLoad) {
+            this.create()
+            this.__isLoaded = true
+        } 
+
         
     }
     init() {}
