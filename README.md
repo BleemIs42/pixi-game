@@ -14,17 +14,17 @@ yarn add pixi-game
 ## new Game(option)
 ## option: As same as option of PIXI.Application.
 ##### *Members*
-- state `[Object]`
-    - __states `[Object]` The container of all add state container.
-    - active `[Object]`
-        - name `[String]`
-        - state `[Object]` Current running state, extends PIXI.Container.
-        - update `[Function]` Current running function in PIXI.ticker.
-    - add `[Function]`
-        - @param name `[String]` State name.
-        - @param state `[Object]` State extends PIXI.Container.
-    - start `[Function]` Switch render a new state to stage.
-        - @param name `[String]` State of state container.
+- **state** `[Object]`
+    - **__states** `[Object]` The container of all add state container.
+    - **active** `[Object]`
+        - **name** `[String]`
+        - **state** `[Object]` Current running state, extends PIXI.Container.
+        - **update** `[Function]` Current running function in PIXI.ticker.
+    - **add** `[Function]`
+        - @param **name** `[String]` State name.
+        - @param **state** `[Object]` State extends PIXI.Container.
+    - **start** `[Function]` Switch render a new state to stage.
+        - @param **name** `[String]` State of state container.
 ##### Example
 ```js
 import * as states from 'components/game'
@@ -53,18 +53,18 @@ document.body.appendChild(window.game.view)
 # State: Extends from PIXI.Container
 ## new State()
 ##### *Members*      
-- game `[Object]` The instance of Game
-- stage `[Object]` Equal **renderer** which is the property of Game's instance.
-- state `[Object]` As same as Game's state.
-- loader `[Object]` PIXI.loader.
-- assets `[Object]` All resource loaded use this.loader.add().
-- add `[Function]`
-    - @param `[String | Object]` The loaded resource name or sprite.
-- init `[Function]` Some init action.
-- preload `[Function]` Use this.add function to preload resource.
-- create `[Function]` After all resource loaded, create display Object.
-- update `[Function]` After displayObjec created, update status.
-- rerener `[Function]` Rerender all displayObject in stage.
+- **game** `[Object]` The instance of Game
+- **stage** `[Object]` Equal **renderer** which is the property of Game's instance.
+- **state** `[Object]` As same as Game's state.
+- **loader** `[Object]` PIXI.loader.
+- **assets** `[Object]` All resource loaded use this.loader.add().
+- **add** `[Function]`
+    - @param **name** `[String | Object]` The loaded resource name or sprite.
+- **init** `[Function]` Some init action.
+- **preload** `[Function]` Use this.add function to preload resource.
+- **create** `[Function]` After all resource loaded, create display Object.
+- **update** `[Function]` After displayObjec created, update status.
+- **rerener** `[Function]` Rerender all displayObject in stage.
 
 ##### Example
 ```js
@@ -113,9 +113,9 @@ export default class extends State {
 ---
 # AnimatedSprite
 ## new AnimatedSprite(baseTexture, spriteSheetJson)
-- @param baseTexture [Object] The instance of PIXI.BaseTexture.
-- @param spriteSheetJson [Object] JSON hash, exporte from TexturePacker.
-- @return [Object] An animated Sprite.
+- @param **baseTexture** [Object] The instance of PIXI.BaseTexture.
+- @param **spriteSheetJson** [Object] JSON hash, exporte from TexturePacker.
+- @return **animatedSprite** [Object] An animated Sprite.
 
 ##### Example 
 ```js
@@ -128,7 +128,7 @@ this.redpack = this.add(redpack, gift)
 ```
 
 ---
-# Example
+# Sample Example
 ```js
 import {
     Game,
