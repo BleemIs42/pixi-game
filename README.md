@@ -30,7 +30,7 @@ yarn add pixi-game
 import * as states from 'components/game'
 class App extends Game {
     constructor() {
-        super(getWinSize().w, getWinSize().h, {
+        super(400, 300, {
             backgroundColor: 0xeeeeee
         })
 
@@ -39,7 +39,7 @@ class App extends Game {
         this.state.start('Boot')
 
         window.onresize = () =>{
-            this.renderer.resize(getWinSize().w, getWinSize().h)
+            this.renderer.resize(800, 600)
             this.state.active.state.removeChildren()
             this.state.active.state.rerender()
         }
@@ -166,6 +166,7 @@ class Loading extends State {
     init() {
         console.log('Loading init')
         this.stage.backgroundColor = 0xff0000
+        this.stage.resize(400, 300)
     }
     preload() {
         console.log('Loading preload')
