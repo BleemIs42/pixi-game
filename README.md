@@ -1,5 +1,5 @@
 # Pixi-game
-> A libiray makes Pixi.js using easily.
+> A library makes Pixi.js using easily.
 
 # Use 
 ```bash
