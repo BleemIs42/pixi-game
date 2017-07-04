@@ -1,7 +1,7 @@
 # Pixi-game
 > A library makes Pixi.js using easily.
 
-# Use 
+# Install 
 ```bash
 npm install pixi-game
 # or
@@ -12,7 +12,7 @@ yarn add pixi-game
 
 # Game: Extends from PIXI.Application.
 ## new Game(option)
-## option: As same option of PIXI.Application.
+## option: As same as option of PIXI.Application.
 ##### *Members*
 - state `[Object]`
     - __states `[Object]` The container of all add state container.
@@ -114,7 +114,7 @@ export default class extends State {
 # AnimatedSprite
 ## new AnimatedSprite(baseTexture, spriteSheetJson)
 - @param baseTexture [Object] The instance of PIXI.BaseTexture.
-- @param spriteSheetJson [Object] JSON hash export from  TexturePacker.
+- @param spriteSheetJson [Object] JSON hash, exporte from TexturePacker.
 - @return [Object] An animated Sprite.
 
 ##### Example 
