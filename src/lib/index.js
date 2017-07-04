@@ -2,7 +2,10 @@ import {
     Application,
     Container,
     loader,
-    Sprite
+    Sprite,
+    Spritesheet,
+    Texture,
+    extras
 } from 'pixi.js'
 
 let __game
