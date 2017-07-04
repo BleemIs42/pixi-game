@@ -9,8 +9,13 @@ yarn add pixi-game
 ```
 
 # Class
+- [Game](https://github.com/Shafley/pixi-game/blob/master/README.md#game)
+- [State](https://github.com/Shafley/pixi-game/blob/master/README.md#state)
+- [AnimatedSpprite](https://github.com/Shafley/pixi-game/blob/master/README.md#animatedsprite)
 
-# Game: Extends from PIXI.Application.
+# Game
+Extends from PIXI.Application.
+
 ## new Game(option)
 ## option: As same as option of PIXI.Application.
 ##### *Members*
@@ -50,7 +55,9 @@ window.game = new App()
 document.body.appendChild(window.game.view)
 ```
 ---
-# State: Extends from PIXI.Container
+# State
+Extends from PIXI.Container
+
 ## new State()
 ##### *Members*      
 - **game** `[Object]` The instance of Game
@@ -112,6 +119,7 @@ export default class extends State {
 
 ---
 # AnimatedSprite
+
 ## new AnimatedSprite(baseTexture, spriteSheetJson)
 - @param **baseTexture** [Object] The instance of PIXI.BaseTexture.
 - @param **spriteSheetJson** [Object] JSON hash, exporte from TexturePacker.
