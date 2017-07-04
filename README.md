@@ -25,7 +25,7 @@ yarn add pixi-game
         - @param **state** `[Object]` State extends PIXI.Container.
     - **start** `[Function]` Switch render a new state to stage.
         - @param **name** `[String]` State of state container.
-##### Example
+##### *Example*
 ```js
 import * as states from 'components/game'
 class App extends Game {
@@ -66,7 +66,7 @@ document.body.appendChild(window.game.view)
 - **update** `[Function]` After displayObjec created, update status.
 - **rerener** `[Function]` Rerender all displayObject in stage.
 
-##### Example
+##### *Example*
 ```js
 import { State } from 'pixi-game'
 import { Text } from 'pixi.js'
@@ -117,7 +117,7 @@ export default class extends State {
 - @param **spriteSheetJson** [Object] JSON hash, exporte from TexturePacker.
 - @return **animatedSprite** [Object] An animated Sprite.
 
-##### Example 
+##### *Example* 
 ```js
 const redpack = new AnimatedSprite(this.assets.redpack.texture.baseTexture, redpackJson)
 redpack.position.set(571, 255)
