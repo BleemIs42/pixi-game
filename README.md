@@ -14,7 +14,7 @@ yarn add pixi-game
 - [AnimatedSpprite](https://github.com/Shafley/pixi-game/blob/master/README.md#animatedsprite)
 
 # Game
-Extends from PIXI.Application.
+Extend from PIXI.Application.
 
 ## new Game(option)
 ## option: As same as option of PIXI.Application.
@@ -56,7 +56,7 @@ document.body.appendChild(window.game.view)
 ```
 ---
 # State
-Extends from PIXI.Container
+Extend from PIXI.Container
 
 ## new State()
 ##### *Members*      
@@ -122,11 +122,12 @@ export default class extends State {
 
 ## new AnimatedSprite(baseTexture, spriteSheetJson)
 - @param **baseTexture** [Object] The instance of PIXI.BaseTexture.
-- @param **spriteSheetJson** [Object] JSON hash, exporte from TexturePacker.
+- @param **spriteSheetJson** [Object] JSON hash, export from TexturePacker.
 - @return **animatedSprite** [Object] An animated Sprite.
 
 ##### *Example* 
 ```js
+import redpackJson from 'assets/redpack.json'
 const redpack = new AnimatedSprite(this.assets.redpack.texture.baseTexture, redpackJson)
 redpack.position.set(571, 255)
 redpackX = redpack.x
