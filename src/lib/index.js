@@ -24,7 +24,6 @@ const stateContainer = {
     },
     start(name) {
         __game.stage.removeChildren()
-        console.log(this.active)
         __game.ticker.remove(this.active.update)
 
         const ActiveState = this.__states[name]
