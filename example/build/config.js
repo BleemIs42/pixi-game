@@ -6,7 +6,7 @@ console.log(`🌹  NODE_ENV: "${env}"\n`)
 export default {
     env: env,
     dev: {
-        port: 8001,
+        port: 8002,
         srcRoot: path.resolve(__dirname, '../src'),
         publicPath: '' ,
         proxyTable: {

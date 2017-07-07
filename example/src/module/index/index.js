@@ -2,12 +2,23 @@ import {
     Game,
     State
 } from '../../../../src/lib/index.js'
+import { Text } from 'pixi.js'
 
 import logo from 'assets/logo.png'
 
 class Boot extends State {
     init() {
         console.log('Boot init')
+        const loading = new Text(
+            'loading...', {
+                fontSize: 50,
+                fill: 0xff0f0f
+            }
+        )
+        // loading.position.set(this.stage.width / 2, this.stage.height / 2)
+        // loading.anchor.set(0.5)
+        // this.loading = loading
+        this.add(loading)
     }
     preload() {
         console.log('Boot preload')
@@ -16,16 +27,13 @@ class Boot extends State {
     create() {
         console.log('Boot create')
 
-        let basicText = new PIXI.Text('Boot text in pixi')
-        this.add(basicText)
+        // this.logo = this.add('logo')
+        // this.logo.x = 100
+        // this.logo.y = 20
 
-        this.logo = this.add('logo')
-        this.logo.x = 100
-        this.logo.y = 20
-
-        setTimeout(() => {
-            this.state.start('Loading')
-        }, 3000)
+        // setTimeout(() => {
+        this.state.start('Loading')
+        // }, 3000)
     }
     update() {
         console.log('Boot update')
@@ -37,15 +45,15 @@ let angle = 0
 class Loading extends State {
     init() {
         console.log('Loading init')
-        this.stage.backgroundColor = 0xff0000
+        // this.stage.backgroundColor = 0xff0000
         // this.stage.width = 800
         // this.stage.height = 600
-        this.stage.resize(800, 600)
-        this.stage.autoResizeboolean = true
+        // this.stage.resize(800, 600)
+        // this.stage.autoResizeboolean = true
     }
     preload() {
         console.log('Loading preload')
-        this.loader.add('logo2', logo)
+        // this.loader.add('logo2', logo)
     }
     create() {
         console.log('Loading create')
@@ -54,8 +62,8 @@ class Loading extends State {
     }
     update() {
         console.log('Loading update')
-        this.basicText.x += Math.cos(angle)
-        angle += 0.2
+        // this.basicText.x += Math.cos(angle)
+        // angle += 0.2
     }
 }
 
@@ -73,7 +81,6 @@ class App extends Game {
         Object.keys(states).forEach(state => this.state.add(state, states[state]))
 
         this.state.start('Boot')
-        console.log(this)
     }
 }
 

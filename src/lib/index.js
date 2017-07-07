@@ -11,6 +11,8 @@ import {
 let __game
 let __assets = {}
 
+let tickerUpdate = () => {}
+
 const stateContainer = {
     __states: {},
     active: {
@@ -23,21 +25,26 @@ const stateContainer = {
         this.__states[name] = state
     },
     start(name) {
-        __game.stage.removeChildren()
-        __game.ticker.remove(this.active.update)
+        setTimeout(() => {
 
-        const ActiveState = this.__states[name]
-        if(!ActiveState) throw new Error(`${name} state is not exist`)
-        const activeState = new ActiveState()
+            __game.stage.removeChildren()
+            __game.ticker.remove(this.active.update)
 
-        const update = () => {
-            if(!activeState.__isCreated) return
-            activeState.update()
-        }
-        __game.ticker.add(update)
-        __game.stage.addChild(activeState)
-        this.active.state = activeState
-        this.active.update = update
+            const ActiveState = this.__states[name]
+            if (!ActiveState) throw new Error(`${name} state is not exist`)
+            const activeState = new ActiveState()
+
+            const update = () => {
+                if (!activeState.__isCreated) return
+                activeState.update()
+            }
+
+            __game.ticker.add(update)
+            __game.stage.addChild(activeState)
+            this.active.state = activeState
+            this.active.update = update
+
+        })
 
     }
 }
@@ -101,11 +108,16 @@ class State extends Container {
             this.create(loaders, resources)
         })
 
-        if(!__isLoaded) {
-            this.create()
-            this.__isCreated = true
-        } 
-        
+        if (!__isLoaded) {
+            // If the loader.add() some resources, 
+            // create() function will be in the callback of loader.load(),
+            // so as same as, when there is no resource loading, run create() asyn.
+            // setTimeout(() => {
+                this.create()
+                this.__isCreated = true
+            // })
+        }
+
     }
     init() {}
     preload() {}
@@ -128,4 +140,4 @@ export {
     Game,
     State,
     AnimatedSprite
-}   
+}
