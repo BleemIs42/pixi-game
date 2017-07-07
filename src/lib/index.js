@@ -25,24 +25,24 @@ const stateContainer = {
         this.__states[name] = state
     },
     start(name) {
-        // Use asyn resolve ticker update fn stack order
+        // Use asyn resolve ticker update fn chain order
         setTimeout(() => {
-            __game.stage.removeChildren()
             __game.ticker.remove(this.active.update)
+            __game.stage.removeChildren()
 
             const ActiveState = this.__states[name]
             if (!ActiveState) throw new Error(`${name} state is not exist`)
-            const activeState = new ActiveState()
 
+            const activeState = new ActiveState()
             const update = () => {
                 if (!activeState.__isCreated) return
                 activeState.update()
             }
-
             __game.ticker.add(update)
-            __game.stage.addChild(activeState)
+            
             this.active.state = activeState
             this.active.update = update
+            __game.stage.addChild(activeState)
         })
     }
 }

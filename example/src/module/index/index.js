@@ -22,7 +22,7 @@ class Boot extends State {
     }
     preload() {
         console.log('Boot preload')
-        this.loader.add('logo', logo)
+        // this.loader.add('logo', logo)
     }
     create() {
         console.log('Boot create')
