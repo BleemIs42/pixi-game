@@ -28,7 +28,7 @@ class Boot extends State {
         }, 3000)
     }
     update() {
-        // console.log('Boot update')
+        console.log('Boot update')
 
     }
 }
@@ -53,7 +53,7 @@ class Loading extends State {
         this.add(this.basicText)
     }
     update() {
-        // console.log('Loading update')
+        console.log('Loading update')
         this.basicText.x += Math.cos(angle)
         angle += 0.2
     }

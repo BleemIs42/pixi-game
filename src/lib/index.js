@@ -24,7 +24,8 @@ const stateContainer = {
     },
     start(name) {
         __game.stage.removeChildren()
-        __game.ticker.remove(this.active.update, this.active.state)
+        console.log(this.active)
+        __game.ticker.remove(this.active.update)
 
         const ActiveState = this.__states[name]
         if(!ActiveState) throw new Error(`${name} state is not exist`)
@@ -36,8 +37,9 @@ const stateContainer = {
         }
         __game.ticker.add(update)
         __game.stage.addChild(activeState)
-        this.active.update = update
         this.active.state = activeState
+        this.active.update = update
+
     }
 }
 
