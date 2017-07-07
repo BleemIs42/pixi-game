@@ -25,8 +25,8 @@ const stateContainer = {
         this.__states[name] = state
     },
     start(name) {
+        // Use asyn resolve ticker update fn stack order
         setTimeout(() => {
-
             __game.stage.removeChildren()
             __game.ticker.remove(this.active.update)
 
@@ -43,9 +43,7 @@ const stateContainer = {
             __game.stage.addChild(activeState)
             this.active.state = activeState
             this.active.update = update
-
         })
-
     }
 }
 
@@ -109,13 +107,8 @@ class State extends Container {
         })
 
         if (!__isLoaded) {
-            // If the loader.add() some resources, 
-            // create() function will be in the callback of loader.load(),
-            // so as same as, when there is no resource loading, run create() asyn.
-            // setTimeout(() => {
-                this.create()
-                this.__isCreated = true
-            // })
+            this.create()
+            this.__isCreated = true
         }
 
     }
