@@ -53,7 +53,7 @@ class Loading extends State {
     }
     preload() {
         console.log('Loading preload')
-        // this.loader.add('logo2', logo)
+        this.loader.add('logo2', logo)
     }
     create() {
         console.log('Loading create')
@@ -81,6 +81,7 @@ class App extends Game {
         Object.keys(states).forEach(state => this.state.add(state, states[state]))
 
         this.state.start('Boot')
+        // this.state.start('Loading')
     }
 }
 
