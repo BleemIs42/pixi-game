@@ -40,6 +40,7 @@ const stateContainer = {
             }
             __game.ticker.add(update)
 
+            this.active.name = name
             this.active.state = activeState
             this.active.update = update
             __game.stage.addChild(activeState)
