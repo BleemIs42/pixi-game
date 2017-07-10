@@ -9,16 +9,14 @@ import {
 } from 'pixi.js'
 
 let __game
-let __assets = {}
-
-let tickerUpdate = () => {}
+let __assets = Object.create(null)
 
 const stateContainer = {
-    __states: {},
+    __states: Object.create(null),
     active: {
         name: '',
-        state: null,
-        update() {}
+        state: Object.create(null),
+        update: null
     },
     add(name, state) {
         if (this.__states[name]) console.warn(`${name} state has registered, please rename it`)
@@ -27,23 +25,26 @@ const stateContainer = {
     start(name) {
         // Use asyn resolve ticker update fn chain order
         setTimeout(() => {
-            __game.ticker.remove(this.active.update)
-            __game.stage.removeChildren()
+            if(this.active.update) __game.ticker.remove(this.active.update)
+
+            if(this.active.state.parent) __game.stage.removeChild(this.active.state)
 
             const ActiveState = this.__states[name]
             if (!ActiveState) throw new Error(`${name} state is not exist`)
 
             const activeState = new ActiveState()
+            __game.stage.addChildAt(activeState, 0)
+
             const update = () => {
                 if (!activeState.__isCreated) return
                 activeState.update()
             }
             __game.ticker.add(update)
-
+            
             this.active.name = name
             this.active.state = activeState
             this.active.update = update
-            __game.stage.addChild(activeState)
+
         })
     }
 }

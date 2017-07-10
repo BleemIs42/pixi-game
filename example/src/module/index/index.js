@@ -82,8 +82,14 @@ class App extends Game {
 
         this.state.start('Boot')
         // this.state.start('Loading')
+
+        const fps = new Text('FPS: ', {fill:0xff0000})
+        this.stage.addChild(fps)
+        this.ticker.add(()=>{
+            fps.text = `FPS: ${parseInt(this.ticker.FPS)}`
+        })
     }
 }
 
-const app = new App()
+window.app = new App()
 document.body.appendChild(app.view)
