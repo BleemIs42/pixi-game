@@ -1,7 +1,7 @@
 import {
     Game,
     State
-} from '../../../../src/lib/index.js'
+} from '../../../../dist/index.js'
 import { Text } from 'pixi.js'
 
 import logo from 'assets/logo.png'

@@ -1,16 +1,17 @@
 {
   "name": "pixi-game",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "",
-  "main": "./dist/pixi-game.min.js",
+  "main": "./dist/index.js",
   "scripts": {
-    "build": "rm -rf dist && NODE_ENV=production node build/index"
+    "build": "rm -rf dist/* && mkdir -p dist && babel ./src/lib/index.js --out-file ./dist/index.js"
   },
   "license": "ISC",
   "dependencies": {
     "pixi.js": "4.5.3"
   },
   "devDependencies": {
+    "babel-cli": "^6.24.1",
     "babel-core": "^6.25.0",
     "babel-loader": "^7.1.1",
     "babel-plugin-transform-runtime": "^6.23.0",
