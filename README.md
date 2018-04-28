@@ -11,7 +11,7 @@ yarn add pixi-game
 # Class
 - [Game](https://github.com/Shafley/pixi-game/blob/master/README.md#game)
 - [State](https://github.com/Shafley/pixi-game/blob/master/README.md#state)
-- [AnimatedSpprite](https://github.com/Shafley/pixi-game/blob/master/README.md#animatedsprite)
+- [AnimatedSprite](https://github.com/Shafley/pixi-game/blob/master/README.md#animatedsprite)
 
 # Game
 Extend from PIXI.Application.
