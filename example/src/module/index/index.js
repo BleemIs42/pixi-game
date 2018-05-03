@@ -58,18 +58,39 @@ class Loading extends State {
     create() {
         console.log('Loading create')
         this.basicText = new PIXI.Text('Loading text in pixi')
+        this.basicText.position.set(100, 100)
         this.add(this.basicText)
     }
     update() {
-        console.log('Loading update')
-        // this.basicText.x += Math.cos(angle)
-        // angle += 0.2
+        // console.log('Loading update')
+        this.basicText.x += Math.cos(angle)
+        angle += 0.2
+    }
+}
+class Next extends State {
+    init() {
+        console.log('Loading init')
+    }
+    preload() {
+        console.log('Loading preload')
+    }
+    create() {
+        console.log('Loading create')
+        this.basicText = new PIXI.Text('Next state')
+        this.basicText.position.set(100, 100)
+        this.add(this.basicText)
+    }
+    update() {
+        // console.log('Loading update')
+        this.basicText.y += Math.cos(angle)
+        angle += 0.2
     }
 }
 
 const states = {
     Boot,
-    Loading
+    Loading,
+    Next
 }
 
 class App extends Game {
@@ -92,4 +113,5 @@ class App extends Game {
 }
 
 window.app = new App()
-document.body.appendChild(app.view)
+var wrap = document.getElementById('app')
+wrap.appendChild(app.view)

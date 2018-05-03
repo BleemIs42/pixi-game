@@ -146,6 +146,8 @@ var State = function (_Container) {
         var __hasResourceNeedLoade = false;
         var loaderAdd = _pixi.loader.add;
         _pixi.loader.add = function (name, path, option, cb) {
+            if (__assets[name]) return;
+
             __hasResourceNeedLoade = true;
             loaderAdd.call(_pixi.loader, name, path, option, cb);
         };
@@ -157,7 +159,16 @@ var State = function (_Container) {
             _this3.loader.load(function (loaders, resources) {
                 _this3.__isCreated = true;
                 __assets = (0, _assign2.default)({}, __assets, resources);
+
+                (0, _keys2.default)(__assets).forEach(function (name) {
+                    Object.defineProperty(__assets[name], 'sprite', {
+                        get: function get() {
+                            return new _pixi.Sprite(__assets[name].texture);
+                        }
+                    });
+                });
                 _this3.assets = __assets;
+
                 _this3.create(loaders, resources);
             });
         }

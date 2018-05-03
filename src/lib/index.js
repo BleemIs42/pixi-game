@@ -94,6 +94,8 @@ class State extends Container {
         let __hasResourceNeedLoade = false
         const loaderAdd = loader.add
         loader.add = (name, path, option, cb) => {
+            if(__assets[name]) return
+            
             __hasResourceNeedLoade = true
             loaderAdd.call(loader, name, path, option, cb)
         }
@@ -105,7 +107,16 @@ class State extends Container {
             this.loader.load((loaders, resources) => {
                 this.__isCreated = true
                 __assets = Object.assign({}, __assets, resources)
+
+                Object.keys(__assets).forEach(name => {
+                    Object.defineProperty(__assets[name], 'sprite', {
+                        get(){
+                            return new Sprite(__assets[name].texture)
+                        }
+                    })
+                })
                 this.assets = __assets
+
                 this.create(loaders, resources)
             })
         }
