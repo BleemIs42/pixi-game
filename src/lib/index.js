@@ -23,7 +23,7 @@ const stateContainer = {
         this.__states[name] = state
     },
     start(name) {
-        // Use asyn resolve ticker update fn chain order
+        // Use async resolve ticker update fn chain order
         setTimeout(() => {
             if(this.active.update) __game.ticker.remove(this.active.update)
 
@@ -91,19 +91,19 @@ class State extends Container {
 
         this.init()
 
-        let __hasResourceNeedLoade = false
+        let __hasResourceNeedLoad = false
         const loaderAdd = loader.add
         loader.add = (name, path, option, cb) => {
             if(__assets[name]) return
-            
-            __hasResourceNeedLoade = true
+
+            __hasResourceNeedLoad = true
             loaderAdd.call(loader, name, path, option, cb)
         }
         this.loader = loader
 
         this.preload()
 
-        if (__hasResourceNeedLoade) {
+        if (__hasResourceNeedLoad) {
             this.loader.load((loaders, resources) => {
                 this.__isCreated = true
                 __assets = Object.assign({}, __assets, resources)
@@ -121,7 +121,7 @@ class State extends Container {
             })
         }
 
-        if (!__hasResourceNeedLoade) {
+        if (!__hasResourceNeedLoad) {
             this.create()
             this.__isCreated = true
         }
