@@ -1,9 +1,6 @@
 # Pixi-game
 > A library makes Pixi.js using easily.
 
-# Demo
-[Online demo](https://shafley.github.io/pixi-game/example/dist/)
-
 # Install 
 ```bash
 npm install pixi-game
